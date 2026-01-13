@@ -68,6 +68,29 @@ export default function RegistrationForm() {
         }
     }, [profile]);
 
+    // Check for duplicate registration
+    useEffect(() => {
+        const checkDuplicate = async () => {
+            if (!formData.email || !formData.email.includes('@')) return;
+
+            try {
+                const apiUrl = import.meta.env.VITE_API_URL || '';
+                const response = await fetch(`${apiUrl}/api/check-registration?email=${formData.email}`);
+                const data = await response.json();
+
+                if (data.exists) {
+                    alert('ท่านได้ลงทะเบียนไปแล้ว ระบบจะพาท่านกลับหน้าหลัก');
+                    navigate('/');
+                }
+            } catch (error) {
+                console.error('Error checking registration:', error);
+            }
+        };
+
+        const timeoutId = setTimeout(checkDuplicate, 1000); // Debounce
+        return () => clearTimeout(timeoutId);
+    }, [formData.email, navigate]);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));

@@ -118,7 +118,46 @@ export const app = new Elysia()
                 }
             },
         }
-    );
+        }
+    )
+    // Setup DB endpoint
+    .get("/api/setup-db", async () => {
+            const { setupDatabase } = await import("./setupDb.js");
+            return await setupDatabase();
+        })
+    // Check registration endpoint
+    .get("/api/check-registration", async ({ query }) => {
+        const email = (query as { email?: string }).email;
+        if (!email) return { exists: false };
+
+        const exists = await checkRegistration(email);
+        return { exists };
+    })
+    // Order endpoint
+    .post("/api/orders", async ({ body, set }) => {
+        const data = body as {
+            firstName: string;
+            lastName: string;
+            email: string;
+            phone: string;
+            amount: number;
+        };
+
+        try {
+            const order = await createOrder({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                phone: data.phone,
+                amount: data.amount,
+            });
+            return { success: true, orderId: order.id };
+        } catch (error) {
+            console.error(error);
+            set.status = 500;
+            return { success: false, message: "Order failed" };
+        }
+    });
 
 // Only listen when running directly (not via export)
 // @ts-ignore

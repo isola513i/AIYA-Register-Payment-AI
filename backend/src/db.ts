@@ -65,3 +65,37 @@ export async function insertRegistration(data: RegistrationData) {
 
     return result[0];
 }
+
+// Check if email already registered
+export async function checkRegistration(email: string) {
+    const result = await sql`
+        SELECT id FROM registrations WHERE email = ${email} LIMIT 1
+    `;
+    return result.length > 0;
+}
+
+// Create new order
+export async function createOrder(data: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    amount: number;
+    slipUrl?: string; // Optional for now
+}) {
+    const result = await sql`
+        INSERT INTO orders (
+            first_name, last_name, email, phone, amount, slip_url, status
+        ) VALUES (
+            ${data.firstName}, 
+            ${data.lastName}, 
+            ${data.email}, 
+            ${data.phone}, 
+            ${data.amount}, 
+            ${data.slipUrl || null}, 
+            'paid'
+        )
+        RETURNING id
+    `;
+    return result[0];
+}
