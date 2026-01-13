@@ -11,7 +11,8 @@ export default function LandingPage() {
                 eventTitle: 'Master the AI Empire',
                 eventDate: '14 ม.ค. 69',
                 // TODO: Replace with image_2e4a48.jpg
-                eventImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000'
+                // TODO: Replace with image_2e4a48.jpg
+                eventImage: '/webinar.png'
             }
         });
     };
@@ -62,7 +63,7 @@ export default function LandingPage() {
                 <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-aiya-purple/10 mb-8 relative group">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020c17] via-transparent to-transparent z-10 opacity-60" />
                     <img
-                        src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000"
+                        src="/webinar.png"
                         alt="Master the AI Empire"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
