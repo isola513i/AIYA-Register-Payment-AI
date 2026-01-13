@@ -1,134 +1,146 @@
 import { useNavigate } from 'react-router-dom';
 import { useLiff } from '../contexts/LiffContext';
 
-const EVENTS = [
-    {
-        id: 1,
-        title: 'Master the AI Empire (Vibe Coding)',
-        date: '14 มกราคม 2569',
-        description: 'เรียนรู้การเขียนโค้ดร่วมกับ AI เพื่อสร้างแอปพลิเคชันระดับเทพ',
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000'
-    },
-    {
-        id: 2,
-        title: 'LINE Mini App for Business',
-        date: '20 กุมภาพันธ์ 2569',
-        description: 'เจาะลึกการสร้าง LINE Mini App เพื่อธุรกิจและการตลาด',
-        image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1000'
-    },
-    {
-        id: 3,
-        title: 'Generative AI Workshop',
-        date: '15 มีนาคม 2569',
-        description: 'เวิร์คช็อปเข้มข้น สร้างภาพและวิดีโอด้วย Generative AI',
-        image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000'
-    }
-];
-
 export default function LandingPage() {
     const navigate = useNavigate();
     const { profile, isLoggedIn, login } = useLiff();
 
-    const handleRegister = (event: typeof EVENTS[0]) => {
+    const handleRegister = () => {
         navigate('/register', {
             state: {
-                eventTitle: event.title,
-                eventDate: event.date,
-                eventImage: event.image
+                eventTitle: 'Master the AI Empire',
+                eventDate: '14 ม.ค. 69',
+                // TODO: Replace with image_2e4a48.jpg
+                eventImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000'
             }
         });
     };
 
     return (
-        <div className="w-full space-y-6 animate-fade-in pb-8">
+        <div className="min-h-screen bg-[#020c17] text-white font-[family-name:var(--font-line-seed)] pb-12 relative overflow-hidden">
 
-            {/* Header */}
-            <div className="flex justify-between items-center mb-6">
-                <div>
-                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-aiya-navy to-aiya-purple">
-                        งานสัมมนาที่น่าสนใจ
-                    </h1>
-                    <p className="text-gray-500 text-sm">Upcoming Events</p>
+            {/* Background Glow Effects */}
+            <div className="absolute top-[-10%] left-[-20%] w-[500px] h-[500px] bg-aiya-purple/20 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-[-20%] w-[500px] h-[500px] bg-aiya-navy/40 rounded-full blur-[100px] pointer-events-none" />
+
+            {/* Navbar / Header */}
+            <nav className="relative z-50 px-6 py-5 flex justify-between items-center">
+                <div className="text-xl font-bold tracking-tighter">
+                    AIYA<span className="text-aiya-purple">.</span>
                 </div>
 
-                {/* Profile / Login */}
+                {/* LIFF Profile */}
                 <div className="flex items-center gap-3">
                     {isLoggedIn && profile ? (
-                        <div className="flex items-center gap-2 bg-white/60 backdrop-blur-sm p-1.5 pr-3 rounded-full border border-white/50 shadow-sm">
+                        <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-1.5 py-1.5 pr-3 rounded-full border border-white/10">
                             {profile.pictureUrl ? (
-                                <img src={profile.pictureUrl} alt={profile.displayName} className="w-8 h-8 rounded-full ring-2 ring-aiya-purple/10" />
+                                <img src={profile.pictureUrl} alt={profile.displayName} className="w-7 h-7 rounded-full ring-2 ring-white/20" />
                             ) : (
-                                <div className="w-8 h-8 rounded-full bg-aiya-purple/10 flex items-center justify-center text-aiya-purple font-bold">
+                                <div className="w-7 h-7 rounded-full bg-aiya-purple/50 flex items-center justify-center text-white text-xs font-bold">
                                     {profile.displayName.charAt(0)}
                                 </div>
                             )}
-                            <span className="text-xs font-bold text-aiya-navy max-w-[80px] truncate hidden sm:block">
+                            <span className="text-xs font-medium text-gray-200 max-w-[80px] truncate hidden sm:block">
                                 {profile.displayName}
                             </span>
                         </div>
                     ) : (
                         <button
                             onClick={login}
-                            className="text-xs font-bold text-aiya-purple bg-aiya-purple/10 px-3 py-2 rounded-full hover:bg-aiya-purple/20 transition-colors"
+                            className="text-xs font-bold text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-all border border-white/5"
                         >
                             Login
                         </button>
                     )}
                 </div>
-            </div>
+            </nav>
 
-            {/* Event List */}
-            <div className="space-y-6">
-                {EVENTS.map((event) => (
-                    <div key={event.id} className="glass-card overflow-hidden hover:shadow-2xl transition-all duration-300 group">
+            {/* Main Content */}
+            <main className="relative z-10 px-6 pt-4 flex flex-col items-center text-center max-w-lg mx-auto">
 
-                        {/* Image Cover */}
-                        <div className="h-48 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                            <img
-                                src={event.image}
-                                alt={event.title}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                            <div className="absolute bottom-3 left-4 z-20">
-                                <span className="bg-aiya-purple/90 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-md">
-                                    Event
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="p-5">
-                            <h3 className="text-xl font-bold text-aiya-navy mb-2 leading-tight">
-                                {event.title}
-                            </h3>
-
-                            <div className="flex items-center gap-2 text-gray-500 text-sm mb-3">
-                                <svg className="w-4 h-4 text-aiya-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                {event.date}
-                            </div>
-
-                            <p className="text-gray-600 text-sm mb-5 line-clamp-2">
-                                {event.description}
-                            </p>
-
-                            <button
-                                onClick={() => handleRegister(event)}
-                                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-aiya-navy to-aiya-purple text-white font-bold text-sm shadow-lg shadow-aiya-purple/20 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-200"
-                            >
-                                ลงทะเบียนทันที
-                            </button>
-                        </div>
-
+                {/* Banner Image */}
+                <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-aiya-purple/10 mb-8 relative group">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020c17] via-transparent to-transparent z-10 opacity-60" />
+                    <img
+                        src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000"
+                        alt="Master the AI Empire"
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    {/* Live Badge */}
+                    <div className="absolute top-4 left-4 z-20">
+                        <span className="flex items-center gap-2 bg-[#020c17]/80 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
+                            <span className="text-[10px] font-bold tracking-wider text-gray-200">LIVE SESSION</span>
+                        </span>
                     </div>
-                ))}
-            </div>
+                </div>
 
-            <p className="text-center text-gray-400 text-xs mt-8">
-                © 2024 AIYA Co., Ltd.
-            </p>
+                {/* Hero Text */}
+                <div className="space-y-4 mb-10 w-full animate-fade-in">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight">
+                        Master the <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F85FF] to-[#3A23B5]">
+                            AI Empire
+                        </span>
+                    </h1>
+
+                    <h2 className="text-xl font-medium text-gray-200">
+                        Build Your Business.
+                    </h2>
+
+                    <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto pt-2">
+                        โลกถล่มด้วย AI... ธุรกิจที่ใช้แรงงานคนแบบเดิมจะค่อยๆ หายไป
+                        คุณจะปรับตัวหรือจะถูกทิ้งไว้ข้างหลัง
+                    </p>
+                </div>
+
+                {/* Event Details Grid */}
+                <div className="grid grid-cols-3 gap-4 w-full mb-10 border-y border-white/5 py-6">
+                    <div className="flex flex-col items-center gap-1">
+                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mb-1 text-aiya-purple">
+                            <span className="text-lg">📅</span>
+                        </div>
+                        <span className="text-[10px] text-gray-500 uppercase tracking-widest">DATE</span>
+                        <span className="text-sm font-bold">14 JAN</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 border-x border-white/5">
+                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mb-1 text-aiya-purple">
+                            <span className="text-lg">⏰</span>
+                        </div>
+                        <span className="text-[10px] text-gray-500 uppercase tracking-widest">TIME</span>
+                        <span className="text-sm font-bold">15:00</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mb-1 text-aiya-purple">
+                            <span className="text-lg">🎥</span>
+                        </div>
+                        <span className="text-[10px] text-gray-500 uppercase tracking-widest">TYPE</span>
+                        <span className="text-sm font-bold">Webinar</span>
+                    </div>
+                </div>
+
+                {/* CTA Button */}
+                <button
+                    onClick={handleRegister}
+                    className="w-full py-4 rounded-full bg-gradient-to-r from-[#3A23B5] to-[#5C499D] text-white font-bold text-lg shadow-lg shadow-aiya-purple/30 relative overflow-hidden group hover:scale-[1.02] active:scale-95 transition-all duration-300"
+                >
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                        ลงทะเบียนเข้าร่วม
+                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </span>
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
+                </button>
+
+                <p className="mt-4 text-[10px] text-gray-600">
+                    *Limited seats available for this exclusive session.
+                </p>
+
+            </main>
         </div>
     );
 }
