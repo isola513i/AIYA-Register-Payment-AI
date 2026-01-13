@@ -137,14 +137,14 @@ export default function LandingPage() {
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
                 </button>
 
-                {/* Ticket Purchase Button */}
-                <button
+                {/* Ticket Purchase Button (Temporarily Hidden) */}
+                {/* <button
                     onClick={() => navigate('/tickets')}
                     className="w-full mt-3 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 font-medium text-sm hover:bg-white/10 hover:text-white transition-all flex items-center justify-center gap-2"
                 >
                     <span>🎟️</span>
                     ซื้อบัตร Workshop (21 Jan)
-                </button>
+                </button> */}
 
                 <p className="mt-4 text-[10px] text-gray-600">
                     *Limited seats available for this exclusive session.

@@ -10,7 +10,8 @@ export default function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/register" element={<RegistrationForm />} />
             <Route path="/thank-you" element={<ThankYou />} />
-            <Route path="/tickets" element={<TicketPurchase />} />
+            {/* <Route path="/tickets" element={<TicketPurchase />} /> */}
+            <Route path="/tickets" element={<LandingPage />} />
         </Routes>
     );
 }
