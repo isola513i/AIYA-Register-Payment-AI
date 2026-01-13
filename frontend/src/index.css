@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AIYA Design System */
+:root {
+  --aiya-navy: #041527;
+  --aiya-navy-light: #0a2540;
+  --aiya-purple: #3A23B5;
+  --aiya-purple-light: #5C499D;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', 'Kanit', system-ui, sans-serif;
+  background-color: #F8FAFC;
+  color: #041527;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom utility classes */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 
+           text-white font-semibold rounded-full
+           bg-aiya-gradient
+           shadow-aiya hover:shadow-aiya-lg
+           transition-all duration-300 ease-out
+           hover:scale-[1.02] active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4
+           text-aiya-navy font-semibold rounded-full
+           border-2 border-aiya-navy bg-white
+           transition-all duration-300 ease-out
+           hover:bg-aiya-gray active:scale-[0.98];
+  }
+
+  .input-field {
+    @apply w-full px-4 py-4 
+           bg-white border border-aiya-gray-border rounded-aiya-sm
+           text-aiya-navy placeholder:text-aiya-text-muted
+           focus:outline-none focus:ring-2 focus:ring-aiya-purple/20 focus:border-aiya-purple
+           transition-all duration-200;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium text-aiya-navy mb-2;
+  }
+
+  .input-error {
+    @apply text-red-500 text-sm mt-1;
+  }
+
+  .card {
+    @apply bg-white rounded-aiya shadow-aiya p-6 md:p-8;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-aiya-gradient;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(58, 35, 181, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(58, 35, 181, 0.5);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Focus visible styles for accessibility */
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-aiya-purple ring-offset-2;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748B;
+}
