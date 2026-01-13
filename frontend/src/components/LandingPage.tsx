@@ -134,7 +134,7 @@ export default function LandingPage() {
                             <img
                                 src="/webinar.png"
                                 alt="Master the AI Empire"
-                                className="w-full h-full object-cover transform lg:scale-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+                                className="w-full h-full object-cover object-bottom transform lg:scale-110 group-hover:scale-105 transition-transform duration-700 ease-out"
                             />
                             {/* Live Badge */}
                             <div className="absolute top-4 left-4 z-20">

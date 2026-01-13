@@ -68,28 +68,8 @@ export default function RegistrationForm() {
         }
     }, [profile]);
 
-    // Check for duplicate registration
-    useEffect(() => {
-        const checkDuplicate = async () => {
-            if (!formData.email || !formData.email.includes('@')) return;
+    // [Removed] Duplicate registration check as per user request to simplify testing
 
-            try {
-                const apiUrl = import.meta.env.VITE_API_URL || '';
-                const response = await fetch(`${apiUrl}/api/check-registration?email=${formData.email}`);
-                const data = await response.json();
-
-                if (data.exists) {
-                    alert('ท่านได้ลงทะเบียนไปแล้ว ระบบจะพาท่านกลับหน้าหลัก');
-                    navigate('/');
-                }
-            } catch (error) {
-                console.error('Error checking registration:', error);
-            }
-        };
-
-        const timeoutId = setTimeout(checkDuplicate, 1000); // Debounce
-        return () => clearTimeout(timeoutId);
-    }, [formData.email, navigate]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -168,7 +148,12 @@ export default function RegistrationForm() {
                     {/* Left Column: Event Context (Desktop Only or Top on Mobile) */}
                     <div className="space-y-6">
                         <div className="glass-card overflow-hidden">
-                            <img src={eventImage} alt={eventTitle} className="w-full aspect-video object-cover" />
+                            <img
+                                src={eventImage}
+                                alt={eventTitle}
+                                className="w-full aspect-video object-cover object-[0%_100%] lg:object-bottom"
+                                style={{ maxHeight: '250px' }}
+                            />
                             <div className="p-6 space-y-4">
                                 <h1 className="text-2xl font-bold text-aiya-navy leading-tight">
                                     {eventTitle}
@@ -289,6 +274,18 @@ export default function RegistrationForm() {
                                         ))}
                                     </select>
                                 </div>
+                                {formData.businessType === 'Other' && (
+                                    <div className="animate-fade-in md:col-span-2">
+                                        <label className="label-modern text-aiya-purple">ระบุประเภทธุรกิจอื่นๆ</label>
+                                        <input
+                                            type="text"
+                                            name="customBusinessType"
+                                            onChange={(e) => setFormData(prev => ({ ...prev, businessType: 'Other: ' + e.target.value }))}
+                                            className="input-modern border-aiya-purple/30 bg-aiya-purple/5"
+                                            placeholder="กรุณาระบุ..."
+                                        />
+                                    </div>
+                                )}
                                 <div>
                                     <label className="label-modern">ขนาดองค์กร</label>
                                     <select
