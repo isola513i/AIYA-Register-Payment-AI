@@ -63,6 +63,29 @@ export default function ThankYou() {
                     </p>
                 </div>
 
+                {/* Info Section */}
+                <div className="space-y-4 mb-8">
+                    <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex gap-4 items-center">
+                        <div className="w-10 h-10 rounded-full bg-aiya-purple/20 flex items-center justify-center shrink-0">
+                            <span className="text-lg">📧</span>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-white">เช็คอีเมลของคุณ</p>
+                            <p className="text-xs text-gray-400">เราได้ส่งลิงก์รับชมและรายละเอียดงานไปที่เมลของคุณแล้ว</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex gap-4 items-center">
+                        <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center shrink-0">
+                            <span className="text-lg">🎥</span>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-white">รับชมไลฟ์สด</p>
+                            <p className="text-xs text-gray-400">คุณสามารถเข้าชมได้ตามวันและเวลาที่กำหนด</p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Event Ticket Card */}
                 <div className="bg-black/20 rounded-2xl p-5 mb-8 border border-white/5 relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-aiya-purple to-aiya-navy"></div>
@@ -74,9 +97,21 @@ export default function ThankYou() {
                         <div>
                             <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-1">UPCOMING EVENT</p>
                             <h3 className="font-bold text-white leading-tight mb-1">{eventTitle}</h3>
-                            <p className="text-sm text-gray-400">{eventDate}</p>
+                            <p className="text-sm text-gray-400">{eventDate} • 14:30 น.</p>
                         </div>
                     </div>
+                </div>
+
+                {/* Stream URL (Quick Access) */}
+                <div className="mb-8 text-center">
+                    <a
+                        href="https://streamyard.com/watch/bfhnnc6NUcxt"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-aiya-purple hover:text-white transition-colors text-xs underline underline-offset-4"
+                    >
+                        ลิงก์สำรองสำหรับเข้าชม (StreamYard)
+                    </a>
                 </div>
 
                 {/* Actions */}
@@ -87,7 +122,7 @@ export default function ThankYou() {
                         transition-all duration-200 flex items-center justify-center gap-2 group"
                     >
                         <span className="group-hover:scale-110 transition-transform">🗓️</span>
-                        เพิ่มลงปฏิทิน
+                        เพิ่มลงปฏิทิน (Google Calendar)
                     </button>
 
                     <button
@@ -95,12 +130,12 @@ export default function ThankYou() {
                         className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#3A23B5] to-[#5C499D] text-white font-bold text-lg 
                         shadow-lg shadow-aiya-purple/20 hover:shadow-aiya-purple/40 hover:scale-[1.02] active:scale-95 transition-all duration-200"
                     >
-                        ปิดหน้าต่าง
+                        กลับหน้าหลัก
                     </button>
                 </div>
 
                 <p className="text-center text-gray-600 text-[10px] mt-8">
-                    *ระบบจะส่งอีเมลยืนยันให้ท่านภายใน 5 นาที
+                    *หากไม่ได้รับอีเมล กรุณาตรวจสอบใน Junk/Spam folder
                 </p>
 
             </div>
