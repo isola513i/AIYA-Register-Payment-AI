@@ -109,51 +109,64 @@ export default function TicketPurchase() {
             <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
                 {/* Left Column: Intro & Packages */}
-                <div className="space-y-8">
-                    <div>
-                        <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                            พร้อมสร้างอาณาจักรของคุณหรือยัง?
+                <div className="space-y-8 relative">
+                    {/* Back Button (Mobile/Desktop) */}
+                    <div className="absolute -top-12 left-0 md:-left-4">
+                        <button
+                            onClick={() => navigate('/')}
+                            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors px-4 py-2 rounded-full hover:bg-white/5"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+                            <span className="text-sm font-medium">ย้อนกลับ</span>
+                        </button>
+                    </div>
+
+                    <div className="mt-8 text-center md:text-left">
+                        <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                            พร้อมสร้างอาณาจักร<br className="hidden md:block" /> ของคุณหรือยัง?
                         </h1>
-                        <p className="text-gray-400 text-lg font-light">
+                        <p className="text-gray-400 text-lg font-light leading-relaxed">
                             เลือกแพ็กเกจที่ต้องการเพื่อจองสิทธิ์ในราคาพิเศษ <br className="hidden md:block" />
                             ระบบจะพาคุณไปยังหน้าชำระเงินถัดไป
                         </p>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                         {/* Single Package */}
                         <div
                             onClick={() => setSelectedPackage('SINGLE')}
-                            className={`relative p-6 rounded-3xl border-2 cursor-pointer transition-all ${selectedPackage === 'SINGLE' ? 'bg-[#1e1b4b]/50 border-[#5C499D]' : 'bg-transparent border-white/10 hover:border-white/30'}`}
+                            className={`relative p-8 rounded-[32px] border-2 cursor-pointer transition-all duration-300 group ${selectedPackage === 'SINGLE' ? 'bg-[#1e1b4b]/60 border-[#5C499D] shadow-2xl shadow-[#5C499D]/20' : 'bg-white/5 border-white/10 hover:border-white/30 hover:bg-white/10'}`}
                         >
-                            <div className="flex justify-between items-start mb-2">
-                                <span className="font-bold text-sm uppercase tracking-wide">SINGLE SEAT (1 ท่าน)</span>
-                                <span className="bg-[#3A23B5] text-xs px-3 py-1 rounded-full font-bold">ประหยัด 5,000</span>
+                            <div className="flex justify-between items-center mb-4">
+                                <span className={`font-bold text-sm uppercase tracking-wider ${selectedPackage === 'SINGLE' ? 'text-[#5C499D]' : 'text-gray-400'}`}>SINGLE SEAT (1 ท่าน)</span>
+                                <span className="bg-[#3A23B5] text-white text-[10px] px-3 py-1.5 rounded-full font-bold shadow-lg shadow-[#3A23B5]/40 animate-pulse">ประหยัด 5,000</span>
                             </div>
-                            <div className="flex items-baseline gap-3">
-                                <span className="text-4xl font-bold">29,900</span>
-                                <span className="text-gray-500 line-through text-sm">34,900 บาท</span>
+                            <div className="flex items-baseline gap-3 mb-2">
+                                <span className="text-5xl font-bold text-white tracking-tight">29,900</span>
+                                <span className="text-gray-500 line-through text-lg">34,900</span>
                             </div>
+                            <p className="text-xs text-gray-500 font-light">ราคาไม่รวมภาษีมูลค่าเพิ่ม</p>
                         </div>
 
                         {/* Duo Package */}
                         <div
                             onClick={() => setSelectedPackage('DUO')}
-                            className={`relative p-6 rounded-3xl border-2 cursor-pointer transition-all ${selectedPackage === 'DUO' ? 'bg-[#1e1b4b]/50 border-[#5C499D]' : 'bg-transparent border-white/10 hover:border-white/30'}`}
+                            className={`relative p-8 rounded-[32px] border-2 cursor-pointer transition-all duration-300 group ${selectedPackage === 'DUO' ? 'bg-[#1e1b4b]/60 border-[#5C499D] shadow-2xl shadow-[#5C499D]/20' : 'bg-white/5 border-white/10 hover:border-white/30 hover:bg-white/10'}`}
                         >
-                            <div className="flex justify-between items-start mb-2">
-                                <span className="font-bold text-sm uppercase tracking-wide">DUO PACK (2 ท่าน)</span>
-                                <span className="bg-[#3A23B5] text-xs px-3 py-1 rounded-full font-bold">ประหยัด 14,900</span>
+                            <div className="flex justify-between items-center mb-4">
+                                <span className={`font-bold text-sm uppercase tracking-wider ${selectedPackage === 'DUO' ? 'text-[#5C499D]' : 'text-gray-400'}`}>DUO PACK (2 ท่าน)</span>
+                                <span className="bg-[#3A23B5] text-white text-[10px] px-3 py-1.5 rounded-full font-bold shadow-lg shadow-[#3A23B5]/40 animate-pulse">ประหยัด 14,900</span>
                             </div>
-                            <div className="flex items-baseline gap-3">
-                                <span className="text-4xl font-bold">54,900</span>
-                                <span className="text-gray-500 line-through text-sm">69,800 บาท</span>
+                            <div className="flex items-baseline gap-3 mb-2">
+                                <span className="text-5xl font-bold text-white tracking-tight">54,900</span>
+                                <span className="text-gray-500 line-through text-lg">69,800</span>
                             </div>
+                            <p className="text-xs text-gray-500 font-light">ราคาไม่รวมภาษีมูลค่าเพิ่ม</p>
                         </div>
                     </div>
 
                     {/* Benefits List */}
-                    <div className="space-y-3 pt-4 border-t border-white/10">
+                    <div className="space-y-4 pt-6 border-t border-white/10">
                         {[
                             'ชำระเงินปลอดภัย (Credit Card / PromptPay)',
                             'ยืนยันที่นั่งทันทีผ่านอีเมล',
@@ -161,8 +174,8 @@ export default function TicketPurchase() {
                             'โบนัสพิเศษ: Cloud Credit มูลค่า $300',
                             'สิทธิ์ Consultant 1:1 รายบุคคล (เฉพาะ 10 ท่านแรก)'
                         ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-3 text-sm text-gray-300">
-                                <div className="w-5 h-5 rounded-full border border-green-500 flex items-center justify-center text-green-500 text-xs">✓</div>
+                            <div key={i} className="flex items-start gap-3 text-sm text-gray-300 group hover:text-white transition-colors">
+                                <div className="mt-0.5 w-5 h-5 rounded-full bg-green-500/10 border border-green-500/50 flex items-center justify-center text-green-400 text-xs shrink-0 group-hover:scale-110 transition-transform">✓</div>
                                 {item}
                             </div>
                         ))}
@@ -268,33 +281,49 @@ export default function TicketPurchase() {
 
             {/* Payment Modal (Reused) */}
             {showPaymentModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in">
-                    <div className="bg-[#0b1623] border border-white/10 rounded-3xl p-6 sm:p-8 max-w-sm w-full relative shadow-2xl">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in font-[family-name:var(--font-line-seed)]">
+                    <div className="bg-[#0b1623] border border-white/10 rounded-[32px] p-8 max-w-sm w-full relative shadow-2xl overflow-hidden">
+                        {/* Glow Effect */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#3A23B5]/20 rounded-full blur-[50px] pointer-events-none"></div>
+
                         <button
                             onClick={() => setShowPaymentModal(false)}
-                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white"
+                            className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-colors z-10"
                         >
                             ✕
                         </button>
 
-                        <div className="text-center mb-6">
-                            <h3 className="text-xl font-bold text-white mb-1">สแกน QR เพื่อชำระเงิน</h3>
-                            <p className="text-gray-400 text-sm">ยอดชำระ: ฿{PACKAGES[selectedPackage].price.toLocaleString()}</p>
+                        <div className="text-center mb-8 relative z-10">
+                            <h3 className="text-2xl font-bold text-white mb-2">สแกน QR เพื่อชำระเงิน</h3>
+                            <div className="flex items-center justify-center gap-2 text-[#8B9CC8]">
+                                <span className="text-sm">ยอดชำระ</span>
+                                <span className="text-xl font-bold text-white">฿{PACKAGES[selectedPackage].price.toLocaleString()}</span>
+                            </div>
                         </div>
 
-                        <div className="bg-white p-4 rounded-2xl mb-6 mx-auto w-64 h-64 flex flex-col items-center justify-center shadow-inner">
-                            <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                                <span className="text-gray-400 text-xs">[QR Code PromptPay]</span>
+                        <div className="bg-white p-4 rounded-3xl mb-8 mx-auto w-64 h-64 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] relative z-10 group">
+                            <div className="w-full h-full bg-gray-50 rounded-2xl flex flex-col items-center justify-center border-2 border-dashed border-gray-200 group-hover:border-[#3A23B5]/30 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><rect x="7" y="7" width="3" height="3" /><rect x="14" y="7" width="3" height="3" /><rect x="7" y="14" width="3" height="3" /><line x1="14" y1="14" x2="14" y2="14" /></svg>
+                                <span className="text-gray-400 text-xs mt-2">[QR Code PromptPay]</span>
                             </div>
                         </div>
 
                         <button
                             onClick={handlePurchase}
                             disabled={isLoading}
-                            className="w-full py-3 rounded-xl bg-[#2CB67D] hover:bg-[#25a06d] text-white font-bold transition-all shadow-lg shadow-green-500/20 active:scale-[0.98]"
+                            className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#2CB67D] to-[#25a06d] text-white font-bold text-lg transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98] relative z-10"
                         >
-                            {isLoading ? 'กำลังส่งคำสั่งซื้อ...' : 'ยืนยันการโอนเงิน'}
+                            {isLoading ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                    กำลังดำเนินการ...
+                                </span>
+                            ) : 'ยืนยันการโอนเงิน'}
                         </button>
+
+                        <p className="mt-4 text-[10px] text-center text-gray-500 relative z-10">
+                            บริษัท เอไอยะ จำกัด (สำนักงานใหญ่)
+                        </p>
                     </div>
                 </div>
             )}
