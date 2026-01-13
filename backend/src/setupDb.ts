@@ -24,7 +24,17 @@ export async function setupDatabase() {
     console.log("Database setup completed successfully.");
     return { success: true, message: "Tables created" };
   } catch (error) {
-    console.error("Database setup failed:", error);
     return { success: false, error: String(error) };
   }
+}
+
+// Allow running directly via Bun/Node
+// @ts-ignore
+if (import.meta.main) {
+  setupDatabase()
+    .then(() => process.exit(0))
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
 }
