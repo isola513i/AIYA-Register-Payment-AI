@@ -62,8 +62,7 @@ export default function TicketPurchase() {
     };
 
     const [discount, setDiscount] = useState(0);
-    // const [isCheckingVoucher, setIsCheckingVoucher] = useState(false);
-    const isCheckingVoucher = false; // Placeholder to avoid breaking UI logic if used below
+    const isCheckingVoucher = false; // Placeholder
 
     // --- INTEGRATION POINT: Voucher API ---
     // ฟังก์ชันสำหรับเช็ค Code กับหลังบ้านพี่ชาย
@@ -73,7 +72,7 @@ export default function TicketPurchase() {
             return;
         }
 
-        // setIsCheckingVoucher(true);
+        // TODO: Start Loading State if needed
         try {
             // TODO: พี่ชายมาแก้ตรงนี้ได้เลยครับเพื่อยิงไป API จริง
             // const res = await fetch(`https://api.aiya.com/check-voucher?code=${code}`);
@@ -90,7 +89,7 @@ export default function TicketPurchase() {
             console.error("Voucher Error", error);
             setDiscount(0);
         } finally {
-            // setIsCheckingVoucher(false);
+            // TODO: End Loading State if needed
         }
     };
 
