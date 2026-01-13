@@ -56,14 +56,14 @@ function getEmailTemplate(firstName: string): string {
                 <strong>Time:</strong> To be announced
               </p>
               <p style="color: rgba(255,255,255,0.9); font-size: 14px; margin: 0;">
-                <strong>Stream Link:</strong> Will be sent before the event
+                <strong>Stream Link:</strong> <a href="https://streamyard.com/watch/bfhnnc6NUcxt" style="color: #ffffff; text-decoration: underline;">https://streamyard.com/watch/bfhnnc6NUcxt</a>
               </p>
             </td>
           </tr>
         </table>
         
         <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-          You will receive another email with the streaming link and calendar invite closer to the event date.
+          Please join via the link above at the scheduled time.
         </p>
         
         <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0;">
@@ -95,6 +95,8 @@ export async function sendConfirmationEmail(
   firstName: string
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   try {
+    console.log(`Attempting to send email to: ${toEmail} from ${SENDER_EMAIL}`);
+
     const command = new SendEmailCommand({
       Source: SENDER_EMAIL,
       Destination: {
@@ -111,7 +113,7 @@ export async function sendConfirmationEmail(
             Charset: "UTF-8",
           },
           Text: {
-            Data: `Hi ${firstName},\n\nThank you for registering for the AIYA Seminar. We're excited to have you join us!\n\nYou will receive the streaming link and calendar invite closer to the event date.\n\nBest regards,\nAIYA Team`,
+            Data: `Hi ${firstName},\n\nThank you for registering for the AIYA Seminar. We're excited to have you join us!\n\nStream Link: https://streamyard.com/watch/bfhnnc6NUcxt\n\nBest regards,\nAIYA Team`,
             Charset: "UTF-8",
           },
         },
@@ -119,13 +121,14 @@ export async function sendConfirmationEmail(
     });
 
     const response = await sesClient.send(command);
+    console.log(`Email sent successfully. MessageId: ${response.MessageId}`);
 
     return {
       success: true,
       messageId: response.MessageId,
     };
-  } catch (error) {
-    console.error("Failed to send email:", error);
+  } catch (error: any) {
+    console.error("Failed to send email FULL ERROR:", JSON.stringify(error, null, 2));
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",
