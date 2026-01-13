@@ -1,7 +1,7 @@
 import { Elysia, t } from "elysia";
 import { cors } from "@elysiajs/cors";
-import { sql, insertRegistration, checkConnection } from "./db";
-import { sendConfirmationEmail } from "./sendEmail";
+import { sql, insertRegistration, checkConnection } from "./db.js";
+import { sendConfirmationEmail } from "./sendEmail.js";
 
 // Registration request validation schema
 const registrationSchema = t.Object({
@@ -37,32 +37,43 @@ export const app = new Elysia()
     .post(
         "/api/register",
         async ({ body, set }) => {
+            // Explicitly cast body to ensure TypeScript knows the structure
+            const data = body as {
+                email: string;
+                firstName: string;
+                lastName: string;
+                phone: string;
+                company: string;
+                businessType: string;
+                position: string;
+                companySize: string;
+            };
+
             try {
                 // Insert registration into database
                 const registration = await insertRegistration({
-                    email: body.email,
-                    firstName: body.firstName,
-                    lastName: body.lastName,
-                    phone: body.phone,
-                    company: body.company,
-                    businessType: body.businessType,
-                    position: body.position,
-                    companySize: body.companySize,
+                    email: data.email,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    phone: data.phone,
+                    company: data.company,
+                    businessType: data.businessType,
+                    position: data.position,
+                    companySize: data.companySize,
                 });
 
                 console.log(`Registration created: ID ${registration.id}`);
 
                 // Send confirmation email
                 const emailResult = await sendConfirmationEmail(
-                    body.email,
-                    body.firstName
+                    data.email,
+                    data.firstName
                 );
 
                 if (!emailResult.success) {
                     console.warn(
-                        `Email failed for ${body.email}: ${emailResult.error}`
+                        `Email failed for ${data.email}: ${emailResult.error}`
                     );
-                    // Don't fail the request if email fails - registration is still valid
                 } else {
                     console.log(`Confirmation email sent: ${emailResult.messageId}`);
                 }
@@ -76,7 +87,6 @@ export const app = new Elysia()
             } catch (error) {
                 console.error("Registration error:", error);
 
-                // Handle duplicate email error
                 if (
                     error instanceof Error &&
                     error.message.includes("unique constraint")
