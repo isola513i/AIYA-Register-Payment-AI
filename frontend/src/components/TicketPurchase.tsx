@@ -318,8 +318,8 @@ export default function TicketPurchase() {
                             className="w-full py-4 mt-8 rounded-full bg-gradient-to-r from-[#3A23B5] to-[#5C499D] text-white font-bold text-lg hover:shadow-lg hover:shadow-aiya-purple/30 transition-all flex flex-col items-center justify-center gap-1 group"
                         >
                             <div className="flex items-center gap-2">
-                                <span>ชำระเงิน</span>
-                                <svg className="group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                                <span>{isCheckingVoucher ? 'กำลังตรวจสอบโค้ด...' : 'ชำระเงิน'}</span>
+                                {!isCheckingVoucher && <svg className="group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>}
                             </div>
                             <span className="text-xs font-normal opacity-90">
                                 ยอดรวม: ฿{(PACKAGES[selectedPackage].price - discount).toLocaleString()}
