@@ -73,7 +73,7 @@ export default function TicketPurchase() {
             return;
         }
 
-        setIsCheckingVoucher(true);
+        // setIsCheckingVoucher(true);
         try {
             // TODO: พี่ชายมาแก้ตรงนี้ได้เลยครับเพื่อยิงไป API จริง
             // const res = await fetch(`https://api.aiya.com/check-voucher?code=${code}`);
@@ -90,7 +90,7 @@ export default function TicketPurchase() {
             console.error("Voucher Error", error);
             setDiscount(0);
         } finally {
-            setIsCheckingVoucher(false);
+            // setIsCheckingVoucher(false);
         }
     };
 
