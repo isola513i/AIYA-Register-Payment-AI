@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import liff from '@line/liff';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -5,10 +6,19 @@ export default function ThankYou() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Get data from previous state, fallback to defaults if accessed directly
-    const name = location.state?.name || 'Guest';
-    const eventTitle = location.state?.eventTitle || 'Master the AI Empire';
-    const eventDate = location.state?.eventDate || 'Coming Soon';
+    // Protected Route: Redirect if accessed directly without registration data
+    const hasRegistered = !!location.state?.name;
+
+    useEffect(() => {
+        if (!hasRegistered) {
+            navigate('/', { replace: true });
+        }
+    }, [hasRegistered, navigate]);
+
+    // Get data from previous state
+    const name = location.state?.name || '';
+    const eventTitle = location.state?.eventTitle || '';
+    const eventDate = location.state?.eventDate || '';
 
     const handleAddToCalendar = () => {
         // Event Details
@@ -100,18 +110,6 @@ export default function ThankYou() {
                             <p className="text-sm text-gray-400">{eventDate} • 14:30 น.</p>
                         </div>
                     </div>
-                </div>
-
-                {/* Stream URL (Quick Access) */}
-                <div className="mb-8 text-center">
-                    <a
-                        href="https://streamyard.com/watch/bfhnnc6NUcxt"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-aiya-purple hover:text-white transition-colors text-xs underline underline-offset-4"
-                    >
-                        ลิงก์สำรองสำหรับเข้าชม (StreamYard)
-                    </a>
                 </div>
 
                 {/* Actions */}
