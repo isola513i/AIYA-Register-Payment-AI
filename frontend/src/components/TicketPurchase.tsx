@@ -83,7 +83,8 @@ export default function TicketPurchase() {
                     lastName,
                     email: formData.email,
                     phone: formData.phone,
-                    amount: PACKAGES[selectedPackage].price,
+                    phone: formData.phone,
+                    amount: PACKAGES[selectedPackage].price - (formData.referralCode && formData.referralCode.length > 2 ? (selectedPackage === 'DUO' ? 2000 : 1000) : 0),
                     packageType: selectedPackage,
                     referralCode: formData.referralCode
                 })
@@ -270,10 +271,15 @@ export default function TicketPurchase() {
 
                         <button
                             onClick={() => setShowPaymentModal(true)}
-                            className="w-full py-4 mt-8 rounded-full bg-gradient-to-r from-[#3A23B5] to-[#5C499D] text-white font-bold text-lg hover:shadow-lg hover:shadow-aiya-purple/30 transition-all flex items-center justify-center gap-2 group"
+                            className="w-full py-4 mt-8 rounded-full bg-gradient-to-r from-[#3A23B5] to-[#5C499D] text-white font-bold text-lg hover:shadow-lg hover:shadow-aiya-purple/30 transition-all flex flex-col items-center justify-center gap-1 group"
                         >
-                            ชำระเงิน
-                            <svg className="group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                            <div className="flex items-center gap-2">
+                                <span>ชำระเงิน</span>
+                                <svg className="group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                            </div>
+                            <span className="text-xs font-normal opacity-90">
+                                ยอดรวม: ฿{(PACKAGES[selectedPackage].price - (formData.referralCode && formData.referralCode.length > 2 ? (selectedPackage === 'DUO' ? 2000 : 1000) : 0)).toLocaleString()}
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -295,9 +301,29 @@ export default function TicketPurchase() {
 
                         <div className="text-center mb-8 relative z-10">
                             <h3 className="text-2xl font-bold text-white mb-2">สแกน QR เพื่อชำระเงิน</h3>
-                            <div className="flex items-center justify-center gap-2 text-[#8B9CC8]">
-                                <span className="text-sm">ยอดชำระ</span>
-                                <span className="text-xl font-bold text-white">฿{PACKAGES[selectedPackage].price.toLocaleString()}</span>
+
+                            {/* Price Breakdown */}
+                            <div className="flex flex-col gap-1 items-center justify-center text-[#8B9CC8]">
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span>ราคาปกติ</span>
+                                    <span className={formData.referralCode && formData.referralCode.length > 2 ? "line-through text-gray-500" : ""}>
+                                        ฿{PACKAGES[selectedPackage].price.toLocaleString()}
+                                    </span>
+                                </div>
+
+                                {formData.referralCode && formData.referralCode.length > 2 && (
+                                    <div className="flex items-center gap-2 text-sm text-green-400">
+                                        <span>ส่วนลด Referral</span>
+                                        <span>-฿{(selectedPackage === 'DUO' ? 2000 : 1000).toLocaleString()}</span>
+                                    </div>
+                                )}
+
+                                <div className="flex items-center gap-2 mt-1">
+                                    <span className="text-sm">ยอดชำระสุทธิ</span>
+                                    <span className="text-2xl font-bold text-white">
+                                        ฿{(PACKAGES[selectedPackage].price - (formData.referralCode && formData.referralCode.length > 2 ? (selectedPackage === 'DUO' ? 2000 : 1000) : 0)).toLocaleString()}
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
