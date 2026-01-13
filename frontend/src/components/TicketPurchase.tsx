@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLiff } from '../contexts/LiffContext';
 
 export default function TicketPurchase() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const { profile } = useLiff();
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const [selectedPackage, setSelectedPackage] = useState<'SINGLE' | 'DUO'>('SINGLE');
     const [formData, setFormData] = useState({
-        name: '', // Combined name field as per design
+        name: '',
         email: '',
         phone: '',
         referralCode: ''
@@ -21,13 +22,37 @@ export default function TicketPurchase() {
         DUO: { price: 54900, fullPrice: 69800, save: 14900, label: 'DUO PACK (2 ท่าน)' }
     };
 
-    // Auto-fill from LIFF
+    // 1. Auto-fill from URL Query Params (Priority: High)
+    // Example: /tickets?package=DUO&name=John&email=john@example.com&referral=ABC
+    useEffect(() => {
+        const pkgParam = searchParams.get('package')?.toUpperCase();
+        if (pkgParam === 'SINGLE' || pkgParam === 'DUO') {
+            setSelectedPackage(pkgParam as 'SINGLE' | 'DUO');
+        }
+
+        const nameParam = searchParams.get('name');
+        const emailParam = searchParams.get('email');
+        const phoneParam = searchParams.get('phone') || searchParams.get('tel');
+        const refParam = searchParams.get('referral') || searchParams.get('code');
+
+        if (nameParam || emailParam || phoneParam || refParam) {
+            setFormData(prev => ({
+                ...prev,
+                name: nameParam || prev.name,
+                email: emailParam || prev.email,
+                phone: phoneParam || prev.phone,
+                referralCode: refParam || prev.referralCode
+            }));
+        }
+    }, [searchParams]);
+
+    // 2. Auto-fill from LIFF (Priority: Low - only if empty)
     useEffect(() => {
         if (profile) {
             setFormData(prev => ({
                 ...prev,
-                email: profile.email || prev.email,
-                name: profile.displayName || prev.name // Use full display name
+                email: (!prev.email) ? (profile.email || '') : prev.email,
+                name: (!prev.name) ? (profile.displayName || '') : prev.name
             }));
         }
     }, [profile]);
