@@ -3,6 +3,7 @@ import type { IncomingMessage, ServerResponse } from 'http';
 
 // Disable Vercel's default body parsing so we can handle the stream/buffer directly
 export const config = {
+    runtime: 'nodejs', // Explicitly force Node.js runtime
     api: {
         bodyParser: false,
     },
