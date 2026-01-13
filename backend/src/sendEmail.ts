@@ -2,18 +2,18 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 // Initialize SES client
 const sesClient = new SESClient({
-    region: Bun.env.AWS_REGION || "ap-southeast-1",
-    credentials: {
-        accessKeyId: Bun.env.AWS_ACCESS_KEY_ID || "",
-        secretAccessKey: Bun.env.AWS_SECRET_ACCESS_KEY || "",
-    },
+  region: process.env.AWS_REGION || "ap-southeast-1",
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+  },
 });
 
-const SENDER_EMAIL = Bun.env.SENDER_EMAIL || "noreply@aiya.ai";
+const SENDER_EMAIL = process.env.SENDER_EMAIL || "noreply@aiya.ai";
 
 // HTML email template with AIYA branding
 function getEmailTemplate(firstName: string): string {
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,44 +91,44 @@ function getEmailTemplate(firstName: string): string {
 
 // Send confirmation email
 export async function sendConfirmationEmail(
-    toEmail: string,
-    firstName: string
+  toEmail: string,
+  firstName: string
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    try {
-        const command = new SendEmailCommand({
-            Source: SENDER_EMAIL,
-            Destination: {
-                ToAddresses: [toEmail],
-            },
-            Message: {
-                Subject: {
-                    Data: "Confirmation: AIYA Seminar Registration",
-                    Charset: "UTF-8",
-                },
-                Body: {
-                    Html: {
-                        Data: getEmailTemplate(firstName),
-                        Charset: "UTF-8",
-                    },
-                    Text: {
-                        Data: `Hi ${firstName},\n\nThank you for registering for the AIYA Seminar. We're excited to have you join us!\n\nYou will receive the streaming link and calendar invite closer to the event date.\n\nBest regards,\nAIYA Team`,
-                        Charset: "UTF-8",
-                    },
-                },
-            },
-        });
+  try {
+    const command = new SendEmailCommand({
+      Source: SENDER_EMAIL,
+      Destination: {
+        ToAddresses: [toEmail],
+      },
+      Message: {
+        Subject: {
+          Data: "Confirmation: AIYA Seminar Registration",
+          Charset: "UTF-8",
+        },
+        Body: {
+          Html: {
+            Data: getEmailTemplate(firstName),
+            Charset: "UTF-8",
+          },
+          Text: {
+            Data: `Hi ${firstName},\n\nThank you for registering for the AIYA Seminar. We're excited to have you join us!\n\nYou will receive the streaming link and calendar invite closer to the event date.\n\nBest regards,\nAIYA Team`,
+            Charset: "UTF-8",
+          },
+        },
+      },
+    });
 
-        const response = await sesClient.send(command);
+    const response = await sesClient.send(command);
 
-        return {
-            success: true,
-            messageId: response.MessageId,
-        };
-    } catch (error) {
-        console.error("Failed to send email:", error);
-        return {
-            success: false,
-            error: error instanceof Error ? error.message : "Unknown error",
-        };
-    }
+    return {
+      success: true,
+      messageId: response.MessageId,
+    };
+  } catch (error) {
+    console.error("Failed to send email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
 }
