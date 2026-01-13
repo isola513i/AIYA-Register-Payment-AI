@@ -151,7 +151,7 @@ export default function RegistrationForm() {
                             <img
                                 src={eventImage}
                                 alt={eventTitle}
-                                className="w-full aspect-video object-cover object-[0%_100%] lg:object-bottom"
+                                className="w-full aspect-video object-cover object-center"
                                 style={{ maxHeight: '250px' }}
                             />
                             <div className="p-6 space-y-4">
@@ -274,12 +274,14 @@ export default function RegistrationForm() {
                                         ))}
                                     </select>
                                 </div>
-                                {formData.businessType === 'Other' && (
+                                {formData.businessType.includes('Other') && (
                                     <div className="animate-fade-in md:col-span-2">
                                         <label className="label-modern text-aiya-purple">ระบุประเภทธุรกิจอื่นๆ</label>
                                         <input
                                             type="text"
                                             name="customBusinessType"
+                                            autoFocus
+                                            value={formData.businessType.replace('Other: ', '') === 'Other' ? '' : formData.businessType.replace('Other: ', '')}
                                             onChange={(e) => setFormData(prev => ({ ...prev, businessType: 'Other: ' + e.target.value }))}
                                             className="input-modern border-aiya-purple/30 bg-aiya-purple/5"
                                             placeholder="กรุณาระบุ..."

@@ -19,9 +19,20 @@ export const app = new Elysia()
     // CORS configuration for frontend
     .use(
         cors({
-            origin: ["http://localhost:5173", "http://localhost:3001", "https://ai-emprie-registration.vercel.app"],
+            origin: (request) => {
+                const origin = request.headers.get("origin");
+                if (!origin) return true;
+
+                // Allow localhost and any vercel.app subdomain
+                const allowedMatch =
+                    origin.startsWith("http://localhost:") ||
+                    origin.endsWith(".vercel.app");
+
+                return allowedMatch;
+            },
             methods: ["GET", "POST", "OPTIONS"],
-            allowedHeaders: ["Content-Type"],
+            allowedHeaders: ["Content-Type", "Authorization"],
+            credentials: true
         })
     )
     // Health check endpoint
