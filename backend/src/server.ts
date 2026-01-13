@@ -15,11 +15,11 @@ const registrationSchema = t.Object({
     companySize: t.String({ minLength: 1, maxLength: 50 }),
 });
 
-const app = new Elysia()
+export const app = new Elysia()
     // CORS configuration for frontend
     .use(
         cors({
-            origin: ["http://localhost:5173", "http://localhost:3001"],
+            origin: ["http://localhost:5173", "http://localhost:3001", "https://ai-emprie-registration.vercel.app"],
             methods: ["GET", "POST", "OPTIONS"],
             allowedHeaders: ["Content-Type"],
         })
@@ -108,12 +108,15 @@ const app = new Elysia()
                 }
             },
         }
-    )
-    // Start server
-    .listen(3000);
+    );
 
-console.log(
-    `🚀 AIYA Event Registration API running at http://${app.server?.hostname}:${app.server?.port}`
-);
+// Only listen when running directly (not via export)
+// @ts-ignore
+if (import.meta.main) {
+    app.listen(3000);
+    console.log(
+        `🚀 AIYA Event Registration API running at http://${app.server?.hostname}:${app.server?.port}`
+    );
+}
 
 export type App = typeof app;
