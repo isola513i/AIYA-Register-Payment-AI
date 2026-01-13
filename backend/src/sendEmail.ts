@@ -29,11 +29,11 @@ function getEmailTemplate(firstName: string): string {
         <!-- Main Card -->
         <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; background-color: #0b1623; border: 1px solid #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
           
-          <!-- Header Image/Banner Area -->
+          <!-- Header Image/Logo Area -->
           <tr>
-            <td style="padding: 40px 40px 20px 40px; text-align: center; background: radial-gradient(circle at top, #1e1b4b 0%, #020c17 100%);">
-              <h1 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: #ffffff;">AIYA</h1>
-              <p style="margin: 10px 0 0 0; color: #64748b; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">AI Business Bootcamp 2026</p>
+            <td style="padding: 40px 40px 20px 40px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <img src="https://ai-emprie-registration.vercel.app/logo-ignite.png" alt="AI Ignite Club" style="max-width: 180px; height: auto; display: inline-block;" />
+              <p style="margin: 15px 0 0 0; color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">AI Business Bootcamp 2026</p>
             </td>
           </tr>
 
