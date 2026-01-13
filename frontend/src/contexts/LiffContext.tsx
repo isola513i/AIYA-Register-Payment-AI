@@ -29,7 +29,7 @@ export const LiffProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         const initLiff = async () => {
             try {
-                await liff.init({ liffId: '2008879589-q6KUIrLg' });
+                await liff.init({ liffId: import.meta.env.VITE_LIFF_ID || '2008879589-q6KUIrLg' });
 
                 setIsReady(true);
 
