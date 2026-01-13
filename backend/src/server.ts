@@ -140,6 +140,8 @@ export const app = new Elysia()
                     email: string;
                     phone: string;
                     amount: number;
+                    packageType: string;
+                    referralCode?: string;
                 };
 
                 try {
@@ -149,6 +151,8 @@ export const app = new Elysia()
                         email: data.email,
                         phone: data.phone,
                         amount: data.amount,
+                        packageType: data.packageType || 'SINGLE',
+                        referralCode: data.referralCode,
                     });
                     return { success: true, orderId: order.id };
                 } catch (error) {

@@ -81,17 +81,21 @@ export async function createOrder(data: {
     email: string;
     phone: string;
     amount: number;
+    packageType: string;
+    referralCode?: string;
     slipUrl?: string; // Optional for now
 }) {
     const result = await sql`
         INSERT INTO orders (
-            first_name, last_name, email, phone, amount, slip_url, status
+            first_name, last_name, email, phone, amount, package_type, referral_code, slip_url, status
         ) VALUES (
             ${data.firstName}, 
             ${data.lastName}, 
             ${data.email}, 
             ${data.phone}, 
-            ${data.amount}, 
+            ${data.amount},
+            ${data.packageType},
+            ${data.referralCode || null}, 
             ${data.slipUrl || null}, 
             'paid'
         )
