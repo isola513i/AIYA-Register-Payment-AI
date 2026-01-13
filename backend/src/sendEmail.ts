@@ -11,76 +11,96 @@ const sesClient = new SESClient({
 
 const SENDER_EMAIL = process.env.SENDER_EMAIL || "noreply@aiya.ai";
 
-// HTML email template with AIYA branding
+// HTML email template with "AIYA Dark Premium" branding
 function getEmailTemplate(firstName: string): string {
   return `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Confirmation</title>
+  <title>Registration Confirmed</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
-    <!-- Header -->
+<body style="margin: 0; padding: 0; font-family: 'Sukhumvit Set', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #020c17;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="width: 100%; background-color: #020c17; color: #ffffff;">
     <tr>
-      <td style="background: linear-gradient(135deg, #041527 0%, #0a2540 100%); padding: 40px 30px; text-align: center;">
-        <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">AIYA</h1>
-        <p style="color: #94a3b8; margin: 10px 0 0 0; font-size: 14px;">AI Business Bootcamp 2026</p>
-      </td>
-    </tr>
-    
-    <!-- Main Content -->
-    <tr>
-      <td style="padding: 40px 30px;">
-        <h2 style="color: #041527; margin: 0 0 20px 0; font-size: 24px;">Registration Confirmed! 🎉</h2>
+      <td align="center" style="padding: 40px 0;">
         
-        <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-          สวัสดีค่ะ/ครับ คุณ${firstName},
-        </p>
-        
-        <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-          Thank you for registering for the <strong>AIYA Seminar</strong>. We're excited to have you join us!
-        </p>
-        
-        <!-- Event Details Card -->
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: linear-gradient(135deg, #3A23B5 0%, #5C499D 100%); border-radius: 16px; margin: 30px 0;">
+        <!-- Main Card -->
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; background-color: #0b1623; border: 1px solid #1e293b; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+          
+          <!-- Header Image/Banner Area -->
           <tr>
-            <td style="padding: 30px;">
-              <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 18px;">📅 Event Details</h3>
-              <p style="color: rgba(255,255,255,0.9); font-size: 14px; margin: 0 0 10px 0;">
-                <strong>Date:</strong> To be announced
+            <td style="padding: 40px 40px 20px 40px; text-align: center; background: radial-gradient(circle at top, #1e1b4b 0%, #020c17 100%);">
+              <h1 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: #ffffff;">AIYA</h1>
+              <p style="margin: 10px 0 0 0; color: #64748b; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">AI Business Bootcamp 2026</p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 20px 40px 40px 40px;">
+              <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 24px; text-align: center;">Registration Confirmed! 🎉</h2>
+              
+              <p style="color: #cbd5e1; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
+                สวัสดีครับ คุณ <strong style="color: #ffffff;">${firstName}</strong>,
               </p>
-              <p style="color: rgba(255,255,255,0.9); font-size: 14px; margin: 0 0 10px 0;">
-                <strong>Time:</strong> To be announced
+              
+              <p style="color: #cbd5e1; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
+                ขอบคุณที่ลงทะเบียนเข้าร่วมงานสัมมนา <strong>Master the AI Empire</strong> เราตื่นเต้นมากที่จะได้พบคุณ!
               </p>
-              <p style="color: rgba(255,255,255,0.9); font-size: 14px; margin: 0;">
-                <strong>Stream Link:</strong> <a href="https://streamyard.com/watch/bfhnnc6NUcxt" style="color: #ffffff; text-decoration: underline;">https://streamyard.com/watch/bfhnnc6NUcxt</a>
+
+              <!-- Event Details Card -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: linear-gradient(135deg, #3A23B5 0%, #5C499D 100%); border-radius: 16px; margin-bottom: 32px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(58, 35, 181, 0.3);">
+                <tr>
+                  <td style="padding: 30px;">
+                    <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">📅 Event Details</h3>
+                    
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td style="padding-bottom: 12px;">
+                          <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">DATE</p>
+                          <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 4px 0 0 0;">14 JAN 2026</p>
+                        </td>
+                        <td style="padding-bottom: 12px;">
+                          <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">TIME</p>
+                          <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 4px 0 0 0;">14:30 น.</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding-top: 12px;">
+                           <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">STREAM LINK</p>
+                           <a href="https://streamyard.com/watch/bfhnnc6NUcxt" style="display: inline-block; color: #ffffff; font-size: 14px; font-weight: 600; margin: 4px 0 0 0; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5);">
+                             👉 Click to Join StreamYard
+                           </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="color: #94a3b8; font-size: 14px; text-align: center; margin-bottom: 0;">
+                (ระบบจะส่ง Link ให้ท่านอีกครั้งทาง SMS และ Email ก่อนเริ่มงาน)
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #0f172a; padding: 20px; text-align: center; border-top: 1px solid #1e293b;">
+              <p style="color: #64748b; font-size: 12px; margin: 0;">
+                © 2026 AIYA Co., Ltd. All rights reserved.
               </p>
             </td>
           </tr>
         </table>
-        
-        <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-          Please join via the link above at the scheduled time.
+
+        <!-- Unsubscribe / Extra Info -->
+        <p style="color: #475569; font-size: 12px; margin-top: 20px;">
+          This email was sent automatically. Please do not reply.
         </p>
-        
-        <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0;">
-          If you have any questions, please don't hesitate to reach out.
-        </p>
-      </td>
-    </tr>
-    
-    <!-- Footer -->
-    <tr>
-      <td style="background-color: #f8fafc; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0;">
-        <p style="color: #94a3b8; font-size: 14px; margin: 0 0 10px 0;">
-          © 2026 AIYA. All rights reserved.
-        </p>
-        <p style="color: #94a3b8; font-size: 12px; margin: 0;">
-          This email was sent because you registered for an AIYA event.
-        </p>
+
       </td>
     </tr>
   </table>
@@ -95,16 +115,20 @@ export async function sendConfirmationEmail(
   firstName: string
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   try {
-    console.log(`Attempting to send email to: ${toEmail} from ${SENDER_EMAIL}`);
+    console.log(`Attempting to send email to: ${toEmail}`);
+
+    // Construct sender with display name
+    // Format: "Display Name" <email@address.com>
+    const sender = `AIYA <${SENDER_EMAIL}>`;
 
     const command = new SendEmailCommand({
-      Source: SENDER_EMAIL,
+      Source: sender, // Changed from SENDER_EMAIL to sender variable
       Destination: {
         ToAddresses: [toEmail],
       },
       Message: {
         Subject: {
-          Data: "Confirmation: AIYA Seminar Registration",
+          Data: "Registration Confirmed: Master the AI Empire",
           Charset: "UTF-8",
         },
         Body: {
@@ -113,7 +137,7 @@ export async function sendConfirmationEmail(
             Charset: "UTF-8",
           },
           Text: {
-            Data: `Hi ${firstName},\n\nThank you for registering for the AIYA Seminar. We're excited to have you join us!\n\nStream Link: https://streamyard.com/watch/bfhnnc6NUcxt\n\nBest regards,\nAIYA Team`,
+            Data: `สวัสดีครับ คุณ ${firstName},\n\nขอบคุณที่ลงทะเบียนงาน Master the AI Empire\n\nDate: 14 JAN 2026\nTime: 14:30 น.\nLink: https://streamyard.com/watch/bfhnnc6NUcxt\n\nAIYA Team`,
             Charset: "UTF-8",
           },
         },
