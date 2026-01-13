@@ -62,7 +62,8 @@ export default function TicketPurchase() {
     };
 
     const [discount, setDiscount] = useState(0);
-    const [isCheckingVoucher, setIsCheckingVoucher] = useState(false);
+    // const [isCheckingVoucher, setIsCheckingVoucher] = useState(false);
+    const isCheckingVoucher = false; // Placeholder to avoid breaking UI logic if used below
 
     // --- INTEGRATION POINT: Voucher API ---
     // ฟังก์ชันสำหรับเช็ค Code กับหลังบ้านพี่ชาย

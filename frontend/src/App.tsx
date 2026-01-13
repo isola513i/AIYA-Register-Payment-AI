@@ -2,8 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import RegistrationForm from './components/RegistrationForm';
 import ThankYou from './components/ThankYou';
-import LandingPage from './components/LandingPage'; // Re-use for redirect
-// import TicketPurchase from './components/TicketPurchase';
+// TicketPurchase is hidden for now
 
 export default function App() {
     return (
