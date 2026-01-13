@@ -90,6 +90,39 @@ function getEmailTemplate(firstName: string): string {
             </td>
           </tr>
 
+          <!-- Recommended Course Section -->
+          <tr>
+            <td style="padding: 0 40px 40px 40px;">
+              <div style="background-color: #FFF5E6; border-radius: 16px; padding: 30px; text-align: center; border: 1px solid #FED7AA;">
+                
+                <div style="display: inline-block; background-color: #EA580C; color: #ffffff; font-size: 10px; font-weight: bold; padding: 6px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px;">
+                  Recommended Course
+                </div>
+                
+                <h3 style="color: #9A3412; font-size: 22px; font-weight: 800; margin: 0 0 20px 0;">Generative AI Bootcamp</h3>
+                
+                <!-- Course Image -->
+                <div style="width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                  <img src="https://framerusercontent.com/images/2e4a4802c6109e37cc60a5e84860183181812837.jpg" alt="Generative AI Bootcamp" style="width: 100%; height: auto; display: block;" />
+                </div>
+                
+                <p style="color: #9A3412; font-size: 14px; line-height: 1.6; margin-bottom: 24px; font-weight: 500;">
+                  อยากเก่ง AI แบบเจาะลึก? เรียนรู้การสร้าง AI Agent และ Automation เพื่อธุรกิจของคุณแบบเข้มข้น กับหลักสูตรที่ดีที่สุดจาก AIYA
+                </p>
+                
+                <a href="https://web.aiya.ai/th/bootcamp/ai-empire" style="display: inline-block; background-color: #EA580C; color: #ffffff; font-size: 16px; font-weight: bold; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.3);">
+                  ดูรายละเอียดหลักสูตร
+                </a>
+
+                <p style="color: #576d85; font-size: 14px; margin-top: 24px; font-style: italic;">
+                  หวังว่าเครื่องมือนี้จะช่วยติดปีกให้ธุรกิจของคุณได้นะครับ<br>
+                  แล้วพบกันในคลาสเรียนอีกครั้งครับ
+                </p>
+
+              </div>
+            </td>
+          </tr>
+
           <!-- Footer -->
           <tr>
             <td style="background-color: #0f172a; padding: 20px; text-align: center; border-top: 1px solid #1e293b;">
