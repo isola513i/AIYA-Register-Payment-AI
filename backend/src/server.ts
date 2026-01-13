@@ -117,82 +117,82 @@ export const app = new Elysia()
                     };
                 }
             },
-        }
+        })
 
-            // Setup DB endpoint
-            .get("/api/setup-db", async () => {
-                const { setupDatabase } = await import("./setupDb.js");
-                return await setupDatabase();
-            })
-            // Check registration endpoint
-            .get("/api/check-registration", async ({ query }) => {
-                const email = (query as { email?: string }).email;
-                if (!email) return { exists: false };
+    // Setup DB endpoint
+    .get("/api/setup-db", async () => {
+        const { setupDatabase } = await import("./setupDb.js");
+        return await setupDatabase();
+    })
+    // Check registration endpoint
+    .get("/api/check-registration", async ({ query }) => {
+        const email = (query as { email?: string }).email;
+        if (!email) return { exists: false };
 
-                const exists = await checkRegistration(email);
-                return { exists };
-            })
-            // Order endpoint
-            .post("/api/orders", async ({ body, set }) => {
-                const data = body as {
-                    firstName: string;
-                    lastName: string;
-                    email: string;
-                    phone: string;
-                    amount: number;
-                    packageType: string;
-                    referralCode?: string;
-                };
+        const exists = await checkRegistration(email);
+        return { exists };
+    })
+    // Order endpoint
+    .post("/api/orders", async ({ body, set }) => {
+        const data = body as {
+            firstName: string;
+            lastName: string;
+            email: string;
+            phone: string;
+            amount: number;
+            packageType: string;
+            referralCode?: string;
+        };
 
-                try {
-                    const order = await createOrder({
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        email: data.email,
-                        phone: data.phone,
-                        amount: data.amount,
-                        packageType: data.packageType || 'SINGLE',
-                        referralCode: data.referralCode,
-                    });
-
-                    // --- INTEGRATION POINT: Sync Order to Company API ---
-                    // Fire-and-forget: Do not await this if you don't want to block the user
-                    (async () => {
-                        try {
-                            // TODO: Replace with your actual Company API URL
-                            // const response = await fetch('https://api.yourcompany.com/v1/orders/sync', {
-                            //     method: 'POST',
-                            //     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
-                            //     body: JSON.stringify({
-                            //         external_id: order.id,
-                            //         customer: {
-                            //             first_name: data.firstName,
-                            //             last_name: data.lastName,
-                            //             email: data.email,
-                            //             phone: data.phone
-                            //         },
-                            //         items: [{
-                            //             sku: data.packageType,
-                            //             price: data.amount,
-                            //             quantity: 1
-                            //         }],
-                            //         referral_code: data.referralCode
-                            //     })
-                            // });
-                            // if (!response.ok) console.error('Failed to sync order to company API');
-                            console.log('Syncing order to company API... (Mock)');
-                        } catch (err) {
-                            console.error('Error syncing order:', err);
-                        }
-                    })();
-
-                    return { success: true, orderId: order.id };
-                } catch (error) {
-                    console.error(error);
-                    set.status = 500;
-                    return { success: false, message: "Order failed" };
-                }
+        try {
+            const order = await createOrder({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                phone: data.phone,
+                amount: data.amount,
+                packageType: data.packageType || 'SINGLE',
+                referralCode: data.referralCode,
             });
+
+            // --- INTEGRATION POINT: Sync Order to Company API ---
+            // Fire-and-forget: Do not await this if you don't want to block the user
+            (async () => {
+                try {
+                    // TODO: Replace with your actual Company API URL
+                    // const response = await fetch('https://api.yourcompany.com/v1/orders/sync', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
+                    //     body: JSON.stringify({
+                    //         external_id: order.id,
+                    //         customer: {
+                    //             first_name: data.firstName,
+                    //             last_name: data.lastName,
+                    //             email: data.email,
+                    //             phone: data.phone
+                    //         },
+                    //         items: [{
+                    //             sku: data.packageType,
+                    //             price: data.amount,
+                    //             quantity: 1
+                    //         }],
+                    //         referral_code: data.referralCode
+                    //     })
+                    // });
+                    // if (!response.ok) console.error('Failed to sync order to company API');
+                    console.log('Syncing order to company API... (Mock)');
+                } catch (err) {
+                    console.error('Error syncing order:', err);
+                }
+            })();
+
+            return { success: true, orderId: order.id };
+        } catch (error) {
+            console.error(error);
+            set.status = 500;
+            return { success: false, message: "Order failed" };
+        }
+    });
 
 // Only listen when running directly (not via export)
 // @ts-ignore
