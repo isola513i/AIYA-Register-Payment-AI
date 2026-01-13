@@ -12,10 +12,10 @@ export async function setupDatabase() {
         last_name VARCHAR(100) NOT NULL,
         email VARCHAR(255) NOT NULL,
         phone VARCHAR(20) NOT NULL,
-        package_type VARCHAR(50) DEFAULT 'STANDARD',
+        package_type VARCHAR(50) DEFAULT 'SINGLE',
         referral_code VARCHAR(50),
         amount DECIMAL(10, 2) NOT NULL,
-        status VARCHAR(20) DEFAULT 'pending',
+        status VARCHAR(20) DEFAULT 'paid',
         slip_url TEXT,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );
