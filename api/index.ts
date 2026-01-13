@@ -1,3 +1,9 @@
 import { app } from '../backend/src/server';
 
-export default app.handle;
+export const config = {
+    runtime: 'edge',
+};
+
+export default (request: Request) => {
+    return app.handle(request);
+};
