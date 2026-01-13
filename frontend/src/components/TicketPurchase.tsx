@@ -371,10 +371,37 @@ export default function TicketPurchase() {
                             </div>
                         </div>
 
-                        <div className="bg-white p-4 rounded-3xl mb-8 mx-auto w-64 h-64 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] relative z-10 group">
-                            <div className="w-full h-full bg-gray-50 rounded-2xl flex flex-col items-center justify-center border-2 border-dashed border-gray-200 group-hover:border-[#3A23B5]/30 transition-colors">
+                        <div className="bg-white p-4 rounded-3xl mb-6 mx-auto w-64 h-auto flex flex-col items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] relative z-10">
+                            {/* QR Section */}
+                            <div className="w-64 h-64 bg-gray-50 rounded-2xl flex flex-col items-center justify-center border-2 border-dashed border-gray-200 mb-4 relative overflow-hidden group">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><rect x="7" y="7" width="3" height="3" /><rect x="14" y="7" width="3" height="3" /><rect x="7" y="14" width="3" height="3" /><line x1="14" y1="14" x2="14" y2="14" /></svg>
                                 <span className="text-gray-400 text-xs mt-2">[QR Code PromptPay]</span>
+                            </div>
+
+                            {/* Slip Upload Section */}
+                            <div className="w-full">
+                                <label className="block w-full cursor-pointer group">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                                // Simulating Upload & Verify
+                                                // In real world: Upload to Server -> Send URL to Slip Verification API
+                                                alert(`เลือกไฟล์: ${file.name}\n(จำลอง: กำลังส่งตรวจสลิป...)`);
+                                            }
+                                        }}
+                                    />
+                                    <div className="w-full py-3 rounded-xl border-2 border-[#3A23B5] border-dashed flex items-center justify-center gap-2 text-[#3A23B5] font-bold text-sm bg-[#3A23B5]/5 hover:bg-[#3A23B5]/10 transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
+                                        <span>แนบสลิปโอนเงิน</span>
+                                    </div>
+                                </label>
+                                <p className="text-[10px] text-gray-400 text-center mt-2">
+                                    *ระบบสามารถเชื่อม API ตรวจสลิปได้ตรงจุดนี้
+                                </p>
                             </div>
                         </div>
 
