@@ -123,9 +123,10 @@ export const app = new Elysia()
 // Only listen when running directly (not via export)
 // @ts-ignore
 if (import.meta.main) {
-    app.listen(3000);
+    const port = process.env.PORT || 3000;
+    app.listen(port);
     console.log(
-        `🚀 AIYA Event Registration API running at http://${app.server?.hostname}:${app.server?.port}`
+        `🚀 AIYA Event Registration API running on port ${port}`
     );
 }
 

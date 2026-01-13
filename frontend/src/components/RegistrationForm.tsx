@@ -97,7 +97,8 @@ export default function RegistrationForm() {
         setError('');
 
         try {
-            const response = await fetch('/api/register', {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const response = await fetch(`${apiUrl}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
