@@ -19,7 +19,7 @@ function getEmailTemplate(firstName: string): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Confirmed</title>
+  <title>ยืนยันการลงทะเบียน</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: 'Sukhumvit Set', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #020c17;">
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="width: 100%; background-color: #020c17; color: #ffffff;">
@@ -40,27 +40,31 @@ function getEmailTemplate(firstName: string): string {
           <!-- Content -->
           <tr>
             <td style="padding: 20px 40px 40px 40px;">
-              <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 24px; text-align: center;">Registration Confirmed! 🎉</h2>
+              <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 24px; text-align: center;">ลงทะเบียนสำเร็จ! 🎉</h2>
               
               <p style="color: #cbd5e1; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
                 สวัสดีครับ คุณ <strong style="color: #ffffff;">${firstName}</strong>,
               </p>
               
-              <p style="color: #cbd5e1; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
-                ขอบคุณที่ลงทะเบียนเข้าร่วมงานสัมมนา <strong>Master the AI Empire</strong> เราตื่นเต้นมากที่จะได้พบคุณ!
-              </p>
+              <div style="background-color: rgba(255,255,255,0.03); border-left: 4px solid #3A23B5; padding: 20px; border-radius: 8px; margin-bottom: 32px;">
+                <h3 style="color: #ffffff; margin: 0 0 10px 0; font-size: 18px;">Master the AI Empire <br/><span style="color: #94a3b8; font-size: 16px; font-weight: normal;">Build Your Business.</span></h3>
+                <p style="color: #cbd5e1; font-size: 14px; line-height: 1.8; margin: 0; font-style: italic;">
+                  "โลกถล่มด้วย AI... ธุรกิจที่ใช้แรงงานคนแบบเดิมจะค่อยๆ หายไป<br/>
+                  คุณจะปรับตัวหรือจะถูกทิ้งไว้ข้างหลัง"
+                </p>
+              </div>
 
               <!-- Event Details Card -->
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: linear-gradient(135deg, #3A23B5 0%, #5C499D 100%); border-radius: 16px; margin-bottom: 32px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(58, 35, 181, 0.3);">
                 <tr>
                   <td style="padding: 30px;">
-                    <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">📅 Event Details</h3>
+                    <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">📅 รายละเอียดงาน (Event Details)</h3>
                     
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
                         <td style="padding-bottom: 12px;">
                           <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">DATE</p>
-                          <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 4px 0 0 0;">14 JAN 2026</p>
+                          <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 4px 0 0 0;">14 ม.ค. 2026</p>
                         </td>
                         <td style="padding-bottom: 12px;">
                           <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">TIME</p>
@@ -71,7 +75,7 @@ function getEmailTemplate(firstName: string): string {
                         <td colspan="2" style="padding-top: 12px;">
                            <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">STREAM LINK</p>
                            <a href="https://streamyard.com/watch/bfhnnc6NUcxt" style="display: inline-block; color: #ffffff; font-size: 14px; font-weight: 600; margin: 4px 0 0 0; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5);">
-                             👉 Click to Join StreamYard
+                             👉 กดที่นี่เพื่อเข้าชม (StreamYard)
                            </a>
                         </td>
                       </tr>
@@ -90,7 +94,7 @@ function getEmailTemplate(firstName: string): string {
           <tr>
             <td style="background-color: #0f172a; padding: 20px; text-align: center; border-top: 1px solid #1e293b;">
               <p style="color: #64748b; font-size: 12px; margin: 0;">
-                © 2026 AIYA Co., Ltd. All rights reserved.
+                © 2026 AIYA Co., Ltd. สงวนลิขสิทธิ์
               </p>
             </td>
           </tr>
@@ -98,7 +102,7 @@ function getEmailTemplate(firstName: string): string {
 
         <!-- Unsubscribe / Extra Info -->
         <p style="color: #475569; font-size: 12px; margin-top: 20px;">
-          This email was sent automatically. Please do not reply.
+          จดหมายนี้ถูกส่งโดยระบบอัตโนมัติ กรุณาอย่าตอบกลับ
         </p>
 
       </td>
@@ -128,7 +132,7 @@ export async function sendConfirmationEmail(
       },
       Message: {
         Subject: {
-          Data: "Registration Confirmed: Master the AI Empire",
+          Data: "ยืนยันการลงทะเบียน: Master the AI Empire",
           Charset: "UTF-8",
         },
         Body: {
@@ -137,7 +141,7 @@ export async function sendConfirmationEmail(
             Charset: "UTF-8",
           },
           Text: {
-            Data: `สวัสดีครับ คุณ ${firstName},\n\nขอบคุณที่ลงทะเบียนงาน Master the AI Empire\n\nDate: 14 JAN 2026\nTime: 14:30 น.\nLink: https://streamyard.com/watch/bfhnnc6NUcxt\n\nAIYA Team`,
+            Data: `สวัสดีครับ คุณ ${firstName},\n\nลงทะเบียนสำเร็จ! Master the AI Empire\nBuild Your Business.\n\n"โลกถล่มด้วย AI... ธุรกิจที่ใช้แรงงานคนแบบเดิมจะค่อยๆ หายไป คุณจะปรับตัวหรือจะถูกทิ้งไว้ข้างหลัง"\n\nวันที่: 14 ม.ค. 2026\nเวลา: 14:30 น.\nLink: https://streamyard.com/watch/bfhnnc6NUcxt\n\nAIYA Team`,
             Charset: "UTF-8",
           },
         },
