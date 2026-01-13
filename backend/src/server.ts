@@ -154,6 +154,38 @@ export const app = new Elysia()
                         packageType: data.packageType || 'SINGLE',
                         referralCode: data.referralCode,
                     });
+
+                    // --- INTEGRATION POINT: Sync Order to Company API ---
+                    // Fire-and-forget: Do not await this if you don't want to block the user
+                    (async () => {
+                        try {
+                            // TODO: Replace with your actual Company API URL
+                            // const response = await fetch('https://api.yourcompany.com/v1/orders/sync', {
+                            //     method: 'POST',
+                            //     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
+                            //     body: JSON.stringify({
+                            //         external_id: order.id,
+                            //         customer: {
+                            //             first_name: data.firstName,
+                            //             last_name: data.lastName,
+                            //             email: data.email,
+                            //             phone: data.phone
+                            //         },
+                            //         items: [{
+                            //             sku: data.packageType,
+                            //             price: data.amount,
+                            //             quantity: 1
+                            //         }],
+                            //         referral_code: data.referralCode
+                            //     })
+                            // });
+                            // if (!response.ok) console.error('Failed to sync order to company API');
+                            console.log('Syncing order to company API... (Mock)');
+                        } catch (err) {
+                            console.error('Error syncing order:', err);
+                        }
+                    })();
+
                     return { success: true, orderId: order.id };
                 } catch (error) {
                     console.error(error);
