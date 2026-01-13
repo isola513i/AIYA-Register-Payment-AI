@@ -109,19 +109,19 @@ export default function TicketPurchase() {
             <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
                 {/* Left Column: Intro & Packages */}
-                <div className="space-y-8 relative">
-                    {/* Back Button (Mobile/Desktop) */}
-                    <div className="absolute -top-12 left-0 md:-left-4">
+                <div className="space-y-8">
+                    {/* Back Button */}
+                    <div className="mb-4 md:mb-0">
                         <button
                             onClick={() => navigate('/')}
-                            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors px-4 py-2 rounded-full hover:bg-white/5"
+                            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/5 -ml-3"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
                             <span className="text-sm font-medium">ย้อนกลับ</span>
                         </button>
                     </div>
 
-                    <div className="mt-8 text-center md:text-left">
+                    <div className="text-center md:text-left">
                         <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                             พร้อมสร้างอาณาจักร<br className="hidden md:block" /> ของคุณหรือยัง?
                         </h1>
