@@ -35,7 +35,6 @@ export default function ThankYou() {
     };
 
     return (
-    return (
         <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-fixed bg-no-repeat bg-cover">
             <div className="max-w-md mx-auto relative z-10 w-full space-y-6 animate-fade-in text-center pt-8">
                 <div className="glass-card p-8 md:p-12 border-t-8 border-t-green-400 relative overflow-hidden">
@@ -92,6 +91,5 @@ export default function ThankYou() {
 
             </div>
         </div>
-    );
     );
 }
