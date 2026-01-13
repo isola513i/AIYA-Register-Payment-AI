@@ -61,6 +61,51 @@ export default function TicketPurchase() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const [discount, setDiscount] = useState(0);
+    const [isCheckingVoucher, setIsCheckingVoucher] = useState(false);
+
+    // --- INTEGRATION POINT: Voucher API ---
+    // ฟังก์ชันสำหรับเช็ค Code กับหลังบ้านพี่ชาย
+    const validateVoucher = async (code: string, pack: 'SINGLE' | 'DUO') => {
+        if (!code || code.length < 3) {
+            setDiscount(0);
+            return;
+        }
+
+        setIsCheckingVoucher(true);
+        try {
+            // TODO: พี่ชายมาแก้ตรงนี้ได้เลยครับเพื่อยิงไป API จริง
+            // const res = await fetch(`https://api.aiya.com/check-voucher?code=${code}`);
+            // const data = await res.json();
+            // setDiscount(data.discountAmount);
+
+            // Mock Logic (ปัจจุบัน): ลด 1,000 ต่อที่นั่ง
+            await new Promise(r => setTimeout(r, 500)); // Simulate API delay
+            const discountPerSeat = 1000;
+            const totalDiscount = pack === 'DUO' ? discountPerSeat * 2 : discountPerSeat;
+            setDiscount(totalDiscount);
+
+        } catch (error) {
+            console.error("Voucher Error", error);
+            setDiscount(0);
+        } finally {
+            setIsCheckingVoucher(false);
+        }
+    };
+
+    // Re-validate when package or code changes
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (formData.referralCode) {
+                validateVoucher(formData.referralCode, selectedPackage);
+            } else {
+                setDiscount(0);
+            }
+        }, 800); // Debounce typing
+        return () => clearTimeout(timer);
+    }, [formData.referralCode, selectedPackage]);
+
+
     const handlePurchase = async () => {
         if (!formData.name || !formData.email || !formData.phone) {
             alert('กรุณากรอกข้อมูลให้ครบถ้วน');
@@ -83,8 +128,7 @@ export default function TicketPurchase() {
                     lastName,
                     email: formData.email,
                     phone: formData.phone,
-                    phone: formData.phone,
-                    amount: PACKAGES[selectedPackage].price - (formData.referralCode && formData.referralCode.length > 2 ? (selectedPackage === 'DUO' ? 2000 : 1000) : 0),
+                    amount: PACKAGES[selectedPackage].price - discount, // Use calculated discount
                     packageType: selectedPackage,
                     referralCode: formData.referralCode
                 })
@@ -278,7 +322,7 @@ export default function TicketPurchase() {
                                 <svg className="group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                             </div>
                             <span className="text-xs font-normal opacity-90">
-                                ยอดรวม: ฿{(PACKAGES[selectedPackage].price - (formData.referralCode && formData.referralCode.length > 2 ? (selectedPackage === 'DUO' ? 2000 : 1000) : 0)).toLocaleString()}
+                                ยอดรวม: ฿{(PACKAGES[selectedPackage].price - discount).toLocaleString()}
                             </span>
                         </button>
                     </div>
@@ -306,22 +350,22 @@ export default function TicketPurchase() {
                             <div className="flex flex-col gap-1 items-center justify-center text-[#8B9CC8]">
                                 <div className="flex items-center gap-2 text-sm">
                                     <span>ราคาปกติ</span>
-                                    <span className={formData.referralCode && formData.referralCode.length > 2 ? "line-through text-gray-500" : ""}>
+                                    <span className={discount > 0 ? "line-through text-gray-500" : ""}>
                                         ฿{PACKAGES[selectedPackage].price.toLocaleString()}
                                     </span>
                                 </div>
 
-                                {formData.referralCode && formData.referralCode.length > 2 && (
+                                {discount > 0 && (
                                     <div className="flex items-center gap-2 text-sm text-green-400">
                                         <span>ส่วนลด Referral</span>
-                                        <span>-฿{(selectedPackage === 'DUO' ? 2000 : 1000).toLocaleString()}</span>
+                                        <span>-฿{discount.toLocaleString()}</span>
                                     </div>
                                 )}
 
                                 <div className="flex items-center gap-2 mt-1">
                                     <span className="text-sm">ยอดชำระสุทธิ</span>
                                     <span className="text-2xl font-bold text-white">
-                                        ฿{(PACKAGES[selectedPackage].price - (formData.referralCode && formData.referralCode.length > 2 ? (selectedPackage === 'DUO' ? 2000 : 1000) : 0)).toLocaleString()}
+                                        ฿{(PACKAGES[selectedPackage].price - discount).toLocaleString()}
                                     </span>
                                 </div>
                             </div>
