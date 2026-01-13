@@ -75,11 +75,18 @@ function getEmailTemplate(firstName: string): string {
                         <td colspan="2" style="padding-top: 12px;">
                            <p style="color: rgba(255,255,255,0.8); font-size: 12px; text-transform: uppercase; margin: 0;">STREAM LINK</p>
                            <a href="https://streamyard.com/watch/bfhnnc6NUcxt" style="display: inline-block; color: #ffffff; font-size: 14px; font-weight: 600; margin: 4px 0 0 0; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5);">
-                             👉 กดที่นี่เพื่อเข้าชม (StreamYard)
+                             👉 กดที่นี่เพื่อเข้าชมไลฟ์สดผ่าน StreamYard
                            </a>
                         </td>
                       </tr>
                     </table>
+
+                    <!-- Add to Calendar Button -->
+                    <div style="margin-top: 24px; text-align: center;">
+                      <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Master+the+AI+Empire&dates=20260114T073000Z/20260114T093000Z&details=Join+us+for+the+AI+Business+Bootcamp+2026!+Stream+link:+https://streamyard.com/watch/bfhnnc6NUcxt&location=Online+Webinar" style="display: inline-block; background-color: rgba(255,255,255,0.1); color: #ffffff; font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3);">
+                        📅 Add to Google Calendar
+                      </a>
+                    </div>
                   </td>
                 </tr>
               </table>
@@ -101,9 +108,9 @@ function getEmailTemplate(firstName: string): string {
                 
                 <h3 style="color: #9A3412; font-size: 22px; font-weight: 800; margin: 0 0 20px 0;">Generative AI Bootcamp</h3>
                 
-                <!-- Course Image -->
+                <!-- Course Image (Now using Webinar Banner) -->
                 <div style="width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
-                  <img src="https://framerusercontent.com/images/2e4a4802c6109e37cc60a5e84860183181812837.jpg" alt="Generative AI Bootcamp" style="width: 100%; height: auto; display: block;" />
+                  <img src="https://ai-emprie-registration.vercel.app/webinar.png" alt="Master the AI Empire" style="width: 100%; height: auto; display: block;" />
                 </div>
                 
                 <p style="color: #9A3412; font-size: 14px; line-height: 1.6; margin-bottom: 24px; font-weight: 500;">

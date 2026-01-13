@@ -95,7 +95,7 @@ export default function LandingPage() {
                                     <span className="text-lg">⏰</span>
                                 </div>
                                 <span className="text-[10px] text-gray-500 uppercase tracking-widest">TIME</span>
-                                <span className="text-sm font-bold">15:00</span>
+                                <span className="text-sm font-bold">14:30</span>
                             </div>
                             <div className="flex flex-col items-center lg:items-start gap-1">
                                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mb-1 text-aiya-purple">

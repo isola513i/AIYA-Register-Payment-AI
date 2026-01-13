@@ -58,6 +58,10 @@ export default function RegistrationForm() {
         companySize: ''
     });
 
+    // Local state to stabilize "Other" input logic
+    const [dropdownSelection, setDropdownSelection] = useState('');
+    const [otherText, setOtherText] = useState('');
+
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -263,9 +267,16 @@ export default function RegistrationForm() {
                                 <div>
                                     <label className="label-modern">ประเภทธุรกิจ</label>
                                     <select
-                                        name="businessType"
-                                        value={formData.businessType}
-                                        onChange={handleChange}
+                                        name="dropdownBusinessType"
+                                        value={dropdownSelection}
+                                        onChange={(e) => {
+                                            setDropdownSelection(e.target.value);
+                                            if (e.target.value !== 'Other') {
+                                                setFormData(prev => ({ ...prev, businessType: e.target.value }));
+                                            } else {
+                                                setFormData(prev => ({ ...prev, businessType: otherText ? `Other: ${otherText}` : 'Other' }));
+                                            }
+                                        }}
                                         className="input-modern appearance-none"
                                     >
                                         <option value="">เลือกประเภท...</option>
@@ -274,15 +285,18 @@ export default function RegistrationForm() {
                                         ))}
                                     </select>
                                 </div>
-                                {formData.businessType.includes('Other') && (
+                                {dropdownSelection === 'Other' && (
                                     <div className="animate-fade-in md:col-span-2">
                                         <label className="label-modern text-aiya-purple">ระบุประเภทธุรกิจอื่นๆ</label>
                                         <input
                                             type="text"
                                             name="customBusinessType"
                                             autoFocus
-                                            value={formData.businessType.replace('Other: ', '') === 'Other' ? '' : formData.businessType.replace('Other: ', '')}
-                                            onChange={(e) => setFormData(prev => ({ ...prev, businessType: 'Other: ' + e.target.value }))}
+                                            value={otherText}
+                                            onChange={(e) => {
+                                                setOtherText(e.target.value);
+                                                setFormData(prev => ({ ...prev, businessType: `Other: ${e.target.value}` }));
+                                            }}
                                             className="input-modern border-aiya-purple/30 bg-aiya-purple/5"
                                             placeholder="กรุณาระบุ..."
                                         />
