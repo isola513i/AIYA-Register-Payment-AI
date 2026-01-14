@@ -37,11 +37,24 @@ export default function RegistrationForm() {
     const location = useLocation();
     const { profile, isLoggedIn, liffObject } = useLiff();
 
-    // [Journey Optimization] Removed redirection logic to allow direct access from external sites.
-
-
     const eventTitle = location.state?.eventTitle || 'Master the AI Empire';
     const eventDate = location.state?.eventDate || '14 ม.ค. 2026';
+
+    // [Journey Optimization] Check if user already registered to skip the form
+    useEffect(() => {
+        const isRegistered = localStorage.getItem('aiya_registered');
+        if (isRegistered) {
+            navigate('/thank-you', {
+                state: {
+                    name: localStorage.getItem('aiya_user_name') || '',
+                    eventTitle: eventTitle,
+                    eventDate: eventDate
+                },
+                replace: true
+            });
+        }
+    }, [navigate, eventTitle, eventDate]);
+
 
     const [formData, setFormData] = useState<FormData>({
         email: '',
@@ -101,7 +114,7 @@ export default function RegistrationForm() {
 
         try {
             const apiUrl = import.meta.env.VITE_API_URL || '';
-            const response = await fetch(`${apiUrl}/api/register`, {
+            const response = await fetch(`${apiUrl} /api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -112,6 +125,10 @@ export default function RegistrationForm() {
             if (!response.ok) {
                 throw new Error(data.message || 'การลงทะเบียนล้มเหลว');
             }
+
+            // [Journey Optimization] Save registration status locally
+            localStorage.setItem('aiya_registered', 'true');
+            localStorage.setItem('aiya_user_name', formData.firstName);
 
             navigate('/thank-you', {
                 state: {
@@ -273,7 +290,7 @@ export default function RegistrationForm() {
                                             if (e.target.value !== 'Other') {
                                                 setFormData(prev => ({ ...prev, businessType: e.target.value }));
                                             } else {
-                                                setFormData(prev => ({ ...prev, businessType: otherText ? `Other: ${otherText}` : 'Other' }));
+                                                setFormData(prev => ({ ...prev, businessType: otherText ? `Other: ${otherText} ` : 'Other' }));
                                             }
                                         }}
                                         className="input-modern appearance-none"
@@ -294,7 +311,7 @@ export default function RegistrationForm() {
                                             value={otherText}
                                             onChange={(e) => {
                                                 setOtherText(e.target.value);
-                                                setFormData(prev => ({ ...prev, businessType: `Other: ${e.target.value}` }));
+                                                setFormData(prev => ({ ...prev, businessType: `Other: ${e.target.value} ` }));
                                             }}
                                             className="input-modern border-aiya-purple/30 bg-aiya-purple/5"
                                             placeholder="กรุณาระบุ..."

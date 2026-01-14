@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import liff from '@line/liff';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function ThankYou() {
@@ -37,11 +36,8 @@ export default function ThankYou() {
     };
 
     const handleClose = () => {
-        if (liff.isInClient()) {
-            liff.closeWindow();
-        } else {
-            navigate('/');
-        }
+        // [Journey Optimization] Redirect to the main marketing site
+        window.location.href = 'https://web.aiya.ai/th/event/webinar';
     };
 
     return (

@@ -105,7 +105,7 @@ export const app = new Elysia()
                     set.status = 409;
                     return {
                         success: false,
-                        message: "This email is already registered",
+                        message: "คุณได้ลงทะเบียนอีเมลนี้ไปแล้วครับ",
                     };
                 }
 
