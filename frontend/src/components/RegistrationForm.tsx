@@ -136,7 +136,7 @@ export default function RegistrationForm() {
     const eventTime = location.state?.eventTime || '15:00 น.';
 
     return (
-        <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-[100dvh] bg-[#020c17] text-white font-[family-name:var(--font-line-seed)] py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             <div className="max-w-5xl mx-auto relative z-10 w-full animate-fade-in">
 
                 {/* Back Button */}
