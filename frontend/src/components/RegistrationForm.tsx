@@ -37,15 +37,11 @@ export default function RegistrationForm() {
     const location = useLocation();
     const { profile, isLoggedIn, liffObject } = useLiff();
 
-    // Redirect if no event data
-    useEffect(() => {
-        if (!location.state?.eventTitle) {
-            navigate('/');
-        }
-    }, [location, navigate]);
+    // [Journey Optimization] Removed redirection logic to allow direct access from external sites.
 
-    const eventTitle = location.state?.eventTitle || 'Event Registration';
-    const eventDate = location.state?.eventDate || '';
+
+    const eventTitle = location.state?.eventTitle || 'Master the AI Empire';
+    const eventDate = location.state?.eventDate || '14 ม.ค. 2026';
 
     const [formData, setFormData] = useState<FormData>({
         email: '',
@@ -133,14 +129,17 @@ export default function RegistrationForm() {
     };
 
     const eventImage = location.state?.eventImage || '/webinar.png';
-    const eventTime = location.state?.eventTime || '15:00 น.';
+    const eventTime = location.state?.eventTime || '14:30 น.';
 
     return (
         <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto relative z-10 w-full animate-fade-in">
 
-                {/* Back Button */}
-                <button onClick={() => navigate(-1)} className="flex items-center text-gray-400 hover:text-aiya-navy mb-8 text-sm transition-colors">
+                {/* Back Button - Points to the main marketing site */}
+                <button
+                    onClick={() => window.location.href = 'https://web.aiya.ai/th/event/webinar'}
+                    className="flex items-center text-gray-400 hover:text-aiya-navy mb-8 text-sm transition-colors"
+                >
                     <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>

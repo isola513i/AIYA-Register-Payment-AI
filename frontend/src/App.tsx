@@ -7,11 +7,11 @@ import ThankYou from './components/ThankYou';
 export default function App() {
     return (
         <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<RegistrationForm />} />
             <Route path="/register" element={<RegistrationForm />} />
             <Route path="/thank-you" element={<ThankYou />} />
             {/* <Route path="/tickets" element={<TicketPurchase />} /> */}
-            <Route path="/tickets" element={<LandingPage />} />
+            <Route path="/landing" element={<LandingPage />} />
         </Routes>
     );
 }
