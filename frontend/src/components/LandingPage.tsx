@@ -18,7 +18,7 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="min-h-[100dvh] bg-[#020c17] text-white font-[family-name:var(--font-line-seed)] pb-12 relative overflow-hidden">
+        <div className="min-h-screen bg-[#020c17] text-white font-[family-name:var(--font-line-seed)] pb-12 relative overflow-hidden">
 
             {/* Background Glow Effects */}
             <div className="absolute top-[-10%] left-[-20%] w-[500px] h-[500px] bg-aiya-purple/20 rounded-full blur-[120px] pointer-events-none" />
